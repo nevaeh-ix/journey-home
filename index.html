@@ -1,0 +1,127 @@
+<!--
+  Journey Home
+  Author: Nevaeh George
+  Date: September 18, 2026
+
+  Theme: Bloom
+  The Bloom slowly spreads through the environment while the user tries to get home. 
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Journey Home: The Fall</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="biome-panic">
+
+    <!-- Background layers -->
+    <div class="layer-sky"></div>
+    <div class="layer-mountains"></div>
+    <div class="layer-hills"></div>
+    <div class="layer-road"></div>
+
+    <!-- Bloom spreading through the environment -->
+    <div class="bloom-layer">
+
+        <div class="bloom-growth bloom-one"></div>
+        <div class="bloom-growth bloom-two"></div>
+        <div class="bloom-growth bloom-three"></div>
+        <div class="bloom-growth bloom-four"></div>
+        <div class="bloom-growth bloom-five"></div>
+
+    </div>
+
+
+    <!-- Main game -->
+    <div id="game-container">
+
+        <!-- Game information -->
+        <header>
+
+            <h1>THE FALL: SURVIVOR'S DIARY</h1>
+
+            <div id="stats-bar">
+
+                <span class="stat">
+                    Entry:
+                    <span id="ui-day">1</span>
+                </span>
+
+                <span class="stat">
+                    Miles Left:
+                    <span id="ui-distance">1000</span>
+                </span>
+
+                <span class="stat stat-food">
+                    Food:
+                    <span id="ui-food">100</span>
+                </span>
+
+                <span class="stat stat-fuel">
+                    Gas:
+                    <span id="ui-fuel">100</span>
+                </span>
+
+                <span class="stat stat-health">
+                    Body:
+                    <span id="ui-health">100</span>
+                </span>
+
+                <span class="stat">
+                    Gear:
+                    <span id="ui-inventory">Empty</span>
+                </span>
+
+            </div>
+
+        </header>
+
+
+        <!-- Diary -->
+        <div id="log-box">
+
+            <p class="text-good font-bold">
+                ENTRY 1. DAY ZERO.
+            </p>
+
+            <p>
+                The news said it was just a small virus. They lied.
+                The spores are spreading faster than the wind, like a
+                culture taking over a dish, and whatever they touch
+                turns to rust and rot. Panic is hitting the streets
+                right now. I have a full tank and 1000 miles between
+                me and my family. I have to make it home before the
+                world completely stops turning.
+            </p>
+
+        </div>
+
+
+        <!-- Choices -->
+        <div id="decision-panel">
+
+            <p id="decision-text">
+                Sirens are blaring in the distance.
+            </p>
+
+            <div id="button-container">
+                <!-- JavaScript adds the buttons here -->
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <script src="game.js"></script>
+
+</body>
+
+</html>

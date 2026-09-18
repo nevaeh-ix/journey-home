@@ -1,0 +1,163 @@
+/*
+  Author: Nevaeh George
+  Date: September 18, 2026
+  This is just basic CSS for game styling. The background is a parallax effect with mountains, hills, and a road. The UI is styled to look like a terminal with a log box and decision panel.
+*/
+
+@keyframes rollScreen {
+    from { background-position-x: 0px; }
+    to { background-position-x: -2000px; } 
+}
+
+body {
+    font-family: 'Courier New', Courier, monospace; 
+    color: white; 
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    transition: background 1.5s ease;
+}
+
+/* --- BIOME VISUAL THEMES --- */
+body.biome-panic { background: linear-gradient(to bottom, #451a03 0%, #b45309 100%); }
+body.biome-panic .layer-mountains { filter: sepia(1) hue-rotate(330deg) brightness(0.8); }
+body.biome-panic .layer-hills { filter: sepia(1) hue-rotate(330deg) brightness(0.6); }
+body.biome-panic .layer-road { background-image: linear-gradient(90deg, #b45309 50%, transparent 50%); }
+
+body.biome-quarantine { background: linear-gradient(to bottom, #1e1e2f 0%, #4a475c 100%); }
+body.biome-quarantine .layer-mountains { filter: grayscale(1) brightness(0.5); }
+body.biome-quarantine .layer-hills { filter: grayscale(1) brightness(0.3); }
+body.biome-quarantine .layer-road { background-image: linear-gradient(90deg, #4a475c 50%, transparent 50%); }
+
+body.biome-deadzone { background: linear-gradient(to bottom, #0f172a 0%, #0ea5e9 100%); }
+body.biome-deadzone .layer-mountains { filter: grayscale(0.5) brightness(1.5) hue-rotate(180deg); }
+body.biome-deadzone .layer-hills { filter: grayscale(0.2) brightness(1.2) hue-rotate(180deg); }
+body.biome-deadzone .layer-road { background-image: linear-gradient(90deg, #0ea5e9 50%, transparent 50%); }
+
+/* Parallax Background Layers */
+.layer-sky {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background-image: radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 4px),
+                      radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 3px);
+    background-size: 550px 550px, 350px 350px; background-position: 0 0, 40px 60px;
+    animation: rollScreen 300s linear infinite; z-index: -10;
+}
+.layer-mountains {
+    position: fixed; bottom: 30%; left: 0; width: 100%; height: 50%;
+    background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMDAwIiBoZWlnaHQ9IjQwMCI+PHBhdGggZD0iTTAsNDAwIEMxNTAsMTUwIDI1MCw1MCA0MDAsMTUwIEM1NTAsMjUwIDY1MCwxMDAgODAwLDIwMCBDOTUwLDMwMCAxMTAwLDUwIDEzMDAsMTUwIEMxNTAwLDI1MCAxNzAwLDEwMCAyMDAwLDMwMCBMMjAwMCw0MDAgWiIgZmlsbD0iIzMxMjg1OSIgb3BhY2l0eT0iMC42Ii8+PC9zdmc+');
+    background-repeat: repeat-x; background-position: bottom left;
+    animation: rollScreen 120s linear infinite; z-index: -9; transition: filter 1.5s ease;
+}
+.layer-hills {
+    position: fixed; bottom: 20%; left: 0; width: 100%; height: 30%;
+    background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMDAwIiBoZWlnaHQ9IjIwMCI+PGVsbGlwc2UgY3g9IjIwMCIgY3k9IjIwMcigcng9IjM1MCIgcnk9IjE1MCIgZmlsbD0iIzEzMTEyNSIvPjxlbGxpcHNlIGN4PSI4MDAiIGN5PSIyN08iIHJ4PSI0NTAiIHJ5PSIyMDAiIGZpbGw9IiMxMzExMjUiLz48ZWxsaXBzZSBjeD0iMTUwMCIgY3k9IjIwMCIgcng9IjQwMCIgcnk9IjE4MCIgZmlsbD0iIzEzMTEyNSIvPjxlbGxpcHNlIGN4PSIyMDAwIiBjeT0iMjIwIiByeD0iMzAwIiByeT0iMTIwIiBmaWxsPSIjMTMxMTI1Ii8+PC9zdmc+');
+    background-repeat: repeat-x; background-position: bottom left;
+    animation: rollScreen 60s linear infinite; z-index: -8; transition: filter 1.5s ease;
+}
+.layer-road {
+    position: fixed; bottom: 0; left: 0; width: 100%; height: 20%;
+    background-color: #0a0a0a; border-top: 4px solid #333;
+    background-size: 200px 8px; background-repeat: repeat-x; background-position: 0 40%;
+    animation: rollScreen 3s linear infinite; z-index: -7; transition: background-image 1.5s ease;
+    box-shadow: inset 0 20px 20px -20px rgba(0,0,0,0.8);
+}
+
+/* UI Container */
+#game-container {
+    width: 90%;
+    max-width: 800px;
+    background-color: rgba(20, 20, 20, 0.9);
+    border: 2px solid #555;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+    position: relative;
+    z-index: 10; 
+}
+
+header {
+    border-bottom: 2px solid #555;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+h1 {
+    margin: 0 0 10px 0;
+    font-size: 24px;
+    color: white;
+    text-shadow: 0px 2px 4px rgba(0,0,0,0.5);
+}
+
+#stats-bar {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+    font-weight: bold;
+}
+
+.stat { background: #333; padding: 5px 10px; border-radius: 4px; border: 1px solid #444; color: white;}
+.stat-health span { color: #4ade80; } 
+.stat-food span { color: #f87171; } 
+.stat-fuel span { color: #60a5fa; } 
+
+#log-box {
+    height: 350px;
+    overflow-y: auto;
+    background-color: rgba(10, 10, 10, 0.8);
+    padding: 15px;
+    border: 1px solid #444;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    box-shadow: inset 0 0 15px rgba(0,0,0,0.8);
+}
+
+#log-box p { margin: 8px 0; line-height: 1.5; color: white; }
+
+.text-day { color: white !important; border-top: 1px solid #333; padding-top: 8px; margin-top: 8px; opacity: 0.8;} 
+.text-event { color: #fbbf24 !important; font-weight: bold; }
+.text-good { color: #4ade80 !important; }
+.text-bad { color: #f87171 !important; }
+.text-biome { color: #c084fc !important; font-weight: bold; text-align: center; }
+
+#decision-panel {
+    background-color: rgba(30, 30, 30, 0.9);
+    padding: 15px;
+    border-radius: 5px;
+    border: 1px solid #444;
+}
+
+#decision-text {
+    font-size: 18px;
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: white;
+}
+
+#button-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+button {
+    background-color: #444;
+    color: white; 
+    border: 1px solid #666;
+    padding: 12px 20px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+button:hover { background-color: #555; }
+button:active { transform: translateY(2px); }
+.btn-action { background-color: #059669; border-color: #047857; }
+.btn-action:hover { background-color: #10b981; }
